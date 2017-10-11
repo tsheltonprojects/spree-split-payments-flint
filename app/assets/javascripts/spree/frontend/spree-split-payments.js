@@ -20,6 +20,15 @@ SplitPayments = {
         $payment_amount.attr('name', '');
       }
     })
+
+    //initialize form checkboxes (the browser cache might have it checked w/o user interaction)
+    $(document).ready(function(){
+        $("input[type='checkbox'][name*='payment_method_id']:checked").each(function() {
+          var $payment_amount = $('#payment_method_' + $(this).val() + '_amount');
+          $payment_amount.attr('name', $payment_amount.data('name'));
+          SplitPayments.showPaymentDetails($(this).val());
+        })
+    })
   },
 
   showPaymentDetails: function(pm_id) {
@@ -59,7 +68,7 @@ SplitPayments = {
     $("input[type='checkbox'][name*='payment_method_id']:checked").each(function() {
       sum += +($("[name='order[payments_attributes][" + $(this).val() + "][amount]']").val())
     });
-    return sum.toFixed(4);
+    return isNaN( sum ) ? (0).toFixed(4) : sum.toFixed(4);
   },
 
   checkOrderTotal: function() {
