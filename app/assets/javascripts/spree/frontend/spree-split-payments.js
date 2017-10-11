@@ -73,7 +73,7 @@ SplitPayments = {
 
   checkOrderTotal: function() {
     var amount = this.amount();
-    if(amount > order_balance) {
+    if(parseInt(amount) > parseInt(order_balance)) {
       alert('exceeding order total');
     } else if(amount == order_balance) {
       this.uncheckNonPartialPaymentMethod();
