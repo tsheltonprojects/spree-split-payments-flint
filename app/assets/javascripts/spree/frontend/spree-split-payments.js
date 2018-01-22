@@ -101,4 +101,7 @@ SplitPayments = {
 
 $(document).ready(function() {
   SplitPayments.initialize();
+  if ( $("#split_payment_options").length > 0 ) {
+    $("input[name=commit]").val("Submit Order");  
+  }
 });
